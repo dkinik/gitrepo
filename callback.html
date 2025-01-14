@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Callback</title>
+</head>
+<script>
+    // Parse the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+
+    // Send the code to the Lambda function
+    fetch('https://your-lambda-endpoint.amazonaws.com/dev/callback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: code, state: state })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Access code:', data.access_code);
+
+        // Exchange the code for an access token
+        const params = new URLSearchParams();
+        params.append('client_id', 'your-client-id');
+        params.append('client_secret', 'your-client-secret');
+        params.append('code', data.access_code);
+        params.append('redirect_uri', 'https://your-github-pages-site.github.io/callback');
+        params.append('state', state);
+
+        return fetch('https://github.com/login/oauth/access_token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            },
+            body: params.toString()
+        });
+    })
+    .then(response => response.json())
+    .then(tokenData => {
+        console.log('Access token:', tokenData.access_token);
+        // Redirect to the home page
+        window.location.href = 'https://your-github-pages-site.github.io';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+</script>
+</html>

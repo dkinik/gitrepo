@@ -17,7 +17,7 @@
         const state = urlParams.get('state');
 
         // Call the Lambda function to exchange the code for an access token
-        fetch('https://z0yx4d5k68.execute-api.us-east-1.amazonaws.com/callback?code=' + code + '&state=' + state, {
+        fetch('https://z0yx4d5k68.execute-api.us-east-1.amazonaws.com/prod/callback?code=' + code + '&state=' + state, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

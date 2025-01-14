@@ -16,21 +16,12 @@
         const code = urlParams.get('code');
         const state = urlParams.get('state');
 
-        // Exchange the code for an access token
-        const params = new URLSearchParams();
-        params.append('client_id', 'Ov23li5blY0ABDArPh1W');
-        params.append('client_secret', '114ed6086ff4059af3cf040470832a78a9514a20');
-        params.append('code', code);
-        params.append('redirect_uri', 'https://dkinik.github.io/gitrepo/callback');
-        params.append('state', state);
-
-        fetch('https://github.com/login/oauth/access_token', {
-            method: 'POST',
+        // Call the Lambda function to exchange the code for an access token
+        fetch('https://z0yx4d5k68.execute-api.us-east-1.amazonaws.com/callback?code=' + code + '&state=' + state, {
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json'
-            },
-            body: params.toString()
+                'Content-Type': 'application/json'
+            }
         })
         .then(response => response.json())
         .then(tokenData => {

@@ -26,6 +26,8 @@
         .then(response => response.json())
         .then(tokenData => {
             console.log('Access token:', tokenData.access_token);
+            // Set a flag in localStorage to indicate successful login
+            localStorage.setItem('loggedIn', 'true');
             // Redirect to the home page
             window.location.href = 'https://dkinik.github.io/gitrepo';
         })

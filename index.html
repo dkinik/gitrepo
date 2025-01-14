@@ -18,6 +18,10 @@
         .container {
             text-align: center;
         }
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +31,16 @@
         <a href="https://github.com/login/oauth/authorize?client_id=Ov23li5blY0ABDArPh1W&redirect_uri=https://dkinik.github.io/gitrepo/callback&scope=read:user">
             <button id="loginButton">Login with GitHub</button>
         </a>
+        <p id="successMessage" class="success-message" style="display: none;">Successfully logged in!</p>
     </div>
+    <script>
+        // Check if the user is logged in
+        if (localStorage.getItem('loggedIn') === 'true') {
+            document.getElementById('successMessage').style.display = 'block';
+            // Clear the flag so the message doesn't show on subsequent visits
+            localStorage.removeItem('loggedIn');
+        }
+    </script>
     <script src="scripts.js"></script>
 </body>
 </html>

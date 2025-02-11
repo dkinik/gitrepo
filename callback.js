@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('State:', state);
 
         // Call the Lambda function to exchange the code for an access token
-        fetch('https://z0yx4d5k68.execute-api.us-east-1.amazonaws.com/prod/callback?code=' + code + '&state=' + state, {
+        fetch('https://lv0nhqm70j.execute-api.us-east-1.amazonaws.com/dev/callback?code=' + code + '&state=' + state, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -16,6 +16,11 @@
         const code = urlParams.get('code');
         const state = urlParams.get('state');
 
+        // Log the parsed parameters to the console
+        console.log('OAuth callback received:');
+        console.log('Code:', code);
+        console.log('State:', state);
+
         // Call the Lambda function to exchange the code for an access token
         fetch('https://z0yx4d5k68.execute-api.us-east-1.amazonaws.com/prod/callback?code=' + code + '&state=' + state, {
             method: 'GET',
